@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<a href="#index">index</a>
+	<a href="#page">page</a>
+	<script src="vueRouter.js"></script>
+	<script>
+	// console.log(vueRouter());
+    // 初次进入时hash为index,source:{js,css,img}等进行加载
+    // 切换到其它板块再异步加载相应的资源
+	    $().config({
+		index:["./index.js","./index.css"],
+		page:["./page.js",".page.css"]
+			 })
+
+	</script>
+</body>
+</html>

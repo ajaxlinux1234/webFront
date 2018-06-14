@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+   	<div id="app">
+		<ul v-for="text in items">
+			<li>{{text}}</li>
+		</ul>
+   	</div>
+   	<input type="text" id="myInput">
+   	<input type="button" value="addItems" id="btn">
+   	<script src="vitrualDOM.js"></script>
+   	<script>
+   	  
+   	  	
+   	  	var	model={
+				obj:{"name":'wuhu'},
+				items:["xiaoming","aha","enheng","zhaungbi"]
+		    }
+
+
+	   var app=document.getElementById('app');
+       vitrualDOM().bind(app)
+                   .observer(model)
+                   .analyze(app);
+  
+       model.items.push();
+
+       btn.onclick=function(){   //按钮点击增加数据对应的页面中的数据也增加
+       	model.items.push(myInput.value);
+       }
+   	  
+
+
+   	</script>
+</body>
+</html>
