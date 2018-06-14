@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script  src="dataCacheAgency.js"></script>
+	<script>
+		
+	var proxyMult=createProxyFactory(dataMethods.mult),
+		proxyPlus=createProxyFactory(dataMethods.plus),
+		proxyDivide=createProxyFactory(dataMethods.divide);
+
+		console.log(proxyMult(1,2,3));
+		console.log(proxyPlus(1,2,3));
+		console.log(proxyDivide(1,2,3));
+	</script>
+</body>
+</html>

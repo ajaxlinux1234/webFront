@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+		img{
+			position: absolute;
+			left: 0;
+			top:0;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		//面向对象的设计原则就是单一职责，这样才能降低程序之间的耦合度，在设计图片预加载的时候我们应该把图片的创建和设置src放到一个对象里面，而把图片的预加载放到另一个对象里面，想想一下，假如以后网速够快的话，我们可以直接删除预加载的代码，而不需要改变第一个对象。
+
+		//为了封装性的原则我们可以把这两个对象整合到一个对象中来
+
+
+
+		var imgPrelod={
+			imgSrcInterface:function() {
+				var imgNode=document.createElement('img');
+				document.body.appendChild(imgNode);
+				return {
+					setSrc:function(src){
+						imgNode.src=src;
+						// console.log(this);
+					}
+				}
+			},
+
+			imgPrelodInterface:function(){
+                var img=new Image,_this=this;
+
+                img.onload=function(){
+                	var _this2=this;
+                	_this.imgSrcInterface().setSrc(_this2.src);
+                }
+
+                return {
+                	setSrc:function(src){
+                		_this.imgSrcInterface().setSrc("http://pic.92to.com/anv/201608/25/ipm421ov5rd.gif");//此时传入preloadImg
+                		// console.log(img);
+                		img.src=src;     //当图片加载完成之后就会把原来的图片覆盖掉
+
+                		console.log(img)
+                	}
+                }
+			}
+		};
+
+		// console.log(imgPrelod.imgPrelodInterface());
+
+		imgPrelod.imgPrelodInterface().setSrc("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=801893892,866300092&fm=11&gp=0.jpg");
+	
+	</script>
+</body>
+</html>

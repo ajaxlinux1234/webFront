@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="div1" style="position: absolute;left: 100px;top:100px;background: red;height: 100px;width: 100px;"></div>
+	<script src="animate.js"></script>
+	<script>
+		var odiv1=document.getElementById("div1");
+		// console.log(tween);
+
+		// console.log(window);
+		new Animation({
+			dom:odiv1,
+			propertyName:'left',
+			easing: 'linear',
+			endPos:500,
+			duration:1000
+		});
+	</script>
+</body>
+</html>

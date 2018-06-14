@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="publish-subscribe.js"></script>
+	<script>
+		// 我们分别封装各个模块，利用发布者增删都不影响其他模块
+
+        var login={};
+
+        event.installEvent(login);
+
+        console.log(login); 
+		var ajax=function(url,fn){
+			console.log("向"+url+"请求了数据");
+			fn();
+		}
+
+
+
+		// ajax("www.baidu.com",function(){//登录成功
+		// 	login.trigger('loginSucc',data);
+		// })
+
+
+		var header = (function(){ // header 模块
+			 login.listen( 'loginSucc', function( data){
+			     header.setAvatar( data.avatar );
+			 });
+			 return {
+				 setAvatar: function( data ){
+				 console.log( '设置 header 模块的头像' );
+				 }
+			 }
+		})();
+		var nav = (function(){ // nav 模块
+			 login.listen( 'loginSucc', function( data ){
+			     nav.setAvatar( data.avatar );
+			 });
+			 return {
+				 setAvatar: function( avatar ){
+				 console.log( '设置 nav 模块的头像' );
+				 }
+			 }
+		})(); 
+	</script>
+</body>
+</html>

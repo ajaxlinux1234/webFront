@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 选择颜色: <select id="colorSelect">
+	 <option value="">请选择</option>
+	 <option value="red">红色</option>
+	 <option value="blue">蓝色</option>
+	 </select>
+	 选择内存: <select id="memorySelect">
+	 <option value="">请选择</option>
+	 <option value="32G">32G</option>
+	 <option value="16G">16G</option>
+	 </select>
+	 输入购买数量: <input type="text" id="numberInput"/><br/>
+	 您选择了颜色: <div id="colorInfo"></div><br/>
+	 您选择了内存: <div id="memoryInfo"></div><br/>
+	 您输入了数量: <div id="numberInfo"></div><br/>
+	 <button id="nextBtn" disabled="true">请选择手机颜色和购买数量以及内存</button> 
+	<script>
+
+	   // 我们以传统的方式进行一个买家购买手机的案例进行代码的重构
+			
+	
+			var goods=[
+				     {
+				     	"color":"red",
+				     	"memory":"32G",
+				     	"number":3
+				     },
+				     {
+			            "color":"red",
+				     	"memory":"16G",
+				     	"number":3
+				     },
+				     {
+			            "color":"blue",
+				     	"memory":"32G",
+				     	"number":1
+				     },
+				     {
+				     	"color":"blue",
+				     	"memory":"16G",
+				     	"number":6
+				     }
+			    ];
+
+				debugger
+			    var goodsInfo=["请选择手机颜色和购买数量以及内存","请选择手机颜色","请选择手机内存","请选择手机数量","放入购物车"];
+
+				var colorSelect = document.getElementById( 'colorSelect' ),
+					 memorySelect = document.getElementById( 'memorySelect' ),
+					 numberInput = document.getElementById( 'numberInput' ),
+					 colorInfo = document.getElementById( 'colorInfo' ),
+					 memoryInfo = document.getElementById( 'memoryInfo' ),
+					 numberInfo = document.getElementById( 'numberInfo' ),
+					 nextBtn = document.getElementById( 'nextBtn' ); 
+	
+				var color=colorSelect.value,
+					memory=memorySelect.value,
+					number=numberInput.value;
+
+
+			    var selectId=[colorSelect,memorySelect,numberInput],
+			    	selectInfoId=[colorInfo,memoryInfo,numberInfo];
+			
+
+			   	nextBtn.innerHTML=goodsInfo[0];
+				for(var i=0,len=objKeyLen(goods[0]);i<len;i++){
+					
+						(function(selectId,i,selectInfoId,goodsInfo){
+							  selectId[i].onchange=function(){
+		
+								if(selectId[i].value===""){
+									nextBtn.disabled=true;
+								}else{
+									selectInfoId[i].innerHTML=selectId[i].value;
+
+									nextBtn.innerHTML=goodsInfo[i+2];
+								
+								}
+	
+							  }
+						})(selectId,i,selectInfoId,goodsInfo);
+
+					
+
+
+				}
+
+				for(var i=0,len=objKeyLen(goods[0]);i<len;i++){
+					if(selectId[i].value===""){
+						break;
+					}else{
+						 nextBtn.disabled="false";
+			             nextBtn.innerHTML="结束";
+					}
+				}
+
+
+
+			   function objKeyLen(obj){
+			   		var arr=[];
+			   		for(var i in obj){
+			   			arr.push(i);
+			   		}
+
+			   		return arr.length;
+			   }
+
+
+	</script>
+</body>
+</html>

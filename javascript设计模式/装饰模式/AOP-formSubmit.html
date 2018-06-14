@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" id="username" placeholder="用户名">
+	<input type="password" id="password" placeholder="密码">
+	<input type="button" id="submitBtn" value="提交">
+	<script>
+		
+		// 我们在表单校验的时候需要把表单验证和表单提交的代码进行分离
+
+
+
+
+	   var before=function(fn,beforeFn){
+			return function(){
+				beforeFn.apply(this,arguments);
+				
+				if(beforeFn.apply(this,arguments)!==false){
+				  return fn.apply(this,arguments);
+				}
+
+				
+			}
+		}
+
+		var validata = function(){
+		 if ( username.value === '' ){
+		 alert ( '用户名不能为空' );
+		 return false;
+		 }
+		 if ( password.value === '' ){
+		 alert ( '密码不能为空' );
+		 return false;
+		 }
+		} 
+
+
+		var ajax=function(url,param){
+			console.log(param);
+		}
+
+		var formSubmit = function(){
+		 var param = {
+		 username: username.value,
+		 password: password.value
+		 }
+		 ajax( 'http:// xxx.com/login', param );
+		}
+
+
+		formSubmit = before( formSubmit,validata);
+
+		submitBtn.onclick = function(){
+		 formSubmit();
+        } 
+
+	</script>
+</body>
+</html>

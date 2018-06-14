@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		// 通过中介者模式我们没必要在一个player死亡时，遍历其它所有player宣布其胜利，我们只需要通知playerDirector中介者来做这件事,这其中也穿插了发布订阅者模式
+
+
+		// 1.创建Player构造函数，为其添加,在构造函数原型方法中不再执行具体操作而是把操作发送给中介者对象playerDirector
+
+		function Player(name, teamColor) {
+			this.name = name;//角色名字
+			this.teamColor = teamColor;//队伍颜色
+			this.state = "alive";//玩家生存状态
+		}
+
+
+		Player.prototype = {
+			win: function () {
+				console.log(this.name + "win");
+			},
+			lose: function () {
+				console.log(this.name + 'lose');
+			},
+			die: function () {
+				this.state = 'dead';
+				playerDirector.reciveMessage('playerDead', this);//给中介者发送消息，玩家死亡
+			},
+			remove: function () {
+				playerDirector.reciveMessage('removePlayer', this);
+			},
+			changeTeam: function (color) {
+				playerDirector.reciveMessage('changeTeam', this, color);
+			}
+		}
+
+		// 2.创建Player工厂函数
+
+		var playerFactory = function (name, teamColor) {
+			var newPlayer = new Player(name, teamColor);
+			playerDirector.reciveMessage("addPlayer", newPlayer);
+			return newPlayer;
+		}
+		// 3.创建中介者
+
+		var playerDirector = (function () {
+			var players = {};
+			var options = {};//中介者执行的操作
+
+
+			options.addPlayer = function (player) {
+				var teamColor = player.teamColor;
+				players[teamColor] = players[teamColor] || [];
+				players[teamColor].push(player);
+			};
+
+			options.removePlayer = function (player) {
+				var teamColor = player.teamColor;
+				teamPlayers = player[teamColor] || [];//获取这个颜色的所有成员
+
+
+				for (var i = teamPlayers.length - 1; i >= 0; i--) {
+					if (teamPlayers[i] === player) {
+						teamPlayers.splice(i, 1);
+					}
+				}
+			};
+			options.changeTeam = function (player, newTeamColor) {
+				options.removePlayer(player);//从原来的队伍中删除
+				player.teamColor = newTeamColor;
+				options.addPlayer(player);//添加到新的队伍中
+			};
+			options.playerDead = function (player) {
+				var teamColor = player.teamColor,
+					teamPlayers = players[teamColor],//这个颜色的所有成员
+					allDie = true;//全部死亡
+
+				for (var i = 0; i < teamPlayers.length; i++) {
+					if (teamPlayers[i].state !== 'dead') {
+						allDie = false;
+						break;
+					}
+				}
+
+
+				if (allDie) {//全部死亡
+					teamPlayers.forEach(function (loseTeamPlay) {//本队的所有玩家失败
+						loseTeamPlay.lose();
+					})
+
+					for (var color in players) {//其它队的所有玩家胜利
+						if (color !== teamColor) {
+							players[color].forEach(function (winTeamPlayer) {
+								winTeamPlayer.win();
+							})
+						}
+					}
+				}
+			};
+
+
+
+			var reciveMessage = function () {
+				var message = Array.prototype.shift.call(arguments);
+				options[message].apply(this, arguments);
+			};
+
+			return {
+				reciveMessage: reciveMessage
+			}
+		})()
+
+
+		// 红队：
+		var player1 = playerFactory('皮蛋', 'red'),
+			player2 = playerFactory('小乖', 'red'),
+			player3 = playerFactory('宝宝', 'red'),
+			player4 = playerFactory('小强', 'red');
+		// 蓝队：
+		var player5 = playerFactory('黑妞', 'blue'),
+			player6 = playerFactory('葱头', 'blue'),
+			player7 = playerFactory('胖墩', 'blue'),
+			player8 = playerFactory('海盗', 'blue');
+
+		var player9 = playerFactory("黑1", 'black');
+		var player10 = playerFactory("黑2", 'black');
+		var player11 = playerFactory("黑3", 'black');
+		var player12 = playerFactory("黑4", 'black');
+		var player13 = playerFactory("黑5", 'black');
+
+		player1.die();
+		player2.die();
+		player3.die();
+		player4.die(); 
+	</script>
+</body>
+
+</html>

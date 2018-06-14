@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">万能遥控器按钮</button>
+	<script>
+		// 组合模式的好处在于我们不必关注细节，只要我们请求树的父对象，它会自动遍历它的子对象,为了避免误操作，我们可以当用户为子节点添加时抛出错误
+
+
+
+		// 命令执行方法
+
+
+		var MacorCommand=function(){
+			return {
+				commandList:[],
+				add:function(command){
+					this.commandList.push(command);
+				},
+				execute:function(){
+					this.commandList.forEach(function(item){
+						item.execute();
+					})
+				}
+			}
+		}
+			
+		
+
+		// 下面为开关音响与电视（两者想关联可以放到一起）
+         
+       	var openSound={
+       		execute:function(){
+       			console.log("open the sound");
+       		}
+       	}
+
+       	var openTV={
+       		execute:function(){
+       			console.log("openTV");
+       		}
+       	}
+
+       	var  Macorcommand1=MacorCommand();
+
+
+       	Macorcommand1.add(openSound);
+       	Macorcommand1.add(openTV);
+
+		// 下面为开门
+
+       var openDoor={
+       	execute:function(){
+       		console.log("open the door");
+       	}
+       }
+
+		// 下面为开关电脑与qq（两者想关联可以放到一起）
+
+       	var openComputer={
+       		execute:function(){
+       			console.log("open the Computer");
+       		}
+       	}
+
+       	var openQQ={
+       		execute:function(){
+       			console.log("openQQ");
+       		}
+       	}
+
+
+       	var Macorcommand2=MacorCommand();
+
+       	Macorcommand2.add(openComputer);
+       	Macorcommand2.add(openQQ);
+
+
+
+
+       	var macorCommand=MacorCommand();
+
+
+       	macorCommand.add(Macorcommand1);//把组合树挂载上去
+       	macorCommand.add(Macorcommand2);//把组合树挂载上去
+       	macorCommand.add(openDoor);//把单独树挂载上去
+
+
+
+
+         // 执行总的command
+
+         var setCommand=(function(macorCommand){
+           btn.onclick=function(){
+        	 macorCommand.execute();
+           }
+         })(macorCommand);
+
+      
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// es6实现继承
+		class Parent{
+			constructor(name){
+				this.name=name;
+			}
+			getName(){
+				return this.name;
+			}
+		}
+
+		class Child extends Parent{
+			constructor(name){
+				super(name);
+			}
+
+			speak(){
+				return "enheng";
+			}
+		}
+
+		var child=new Child("xiaming");
+		console.log(child.getName()+" "+child.speak());
+	</script>
+</body>
+</html>

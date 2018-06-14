@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button tag="login" id="btn">点击打开登录浮层</button>
+	<script>
+		
+		// 在实际的开发中我们有时候需要统计用户数据，这时候我们不得不在原来的业务逻辑代码中增加数据统计的代码，耦合度增加显的非常乱，这时候我们可以利用AOP把这两种代码分离
+
+		var after=function(fn,afterFn){
+			return function(){
+				fn.apply(this,arguments);
+
+
+				return afterFn.apply(this,arguments);
+			}
+		}
+
+
+		var showLogin=function(){
+			console.log("打开浮动层");
+		}
+
+		var log=function(){
+			console.log("上报的标签为："+this.getAttribute('tag'));
+		}
+
+
+		var showLogin=after(showLogin,log);
+
+
+
+		btn.onclick=showLogin;
+
+
+	</script>
+</body>
+</html>

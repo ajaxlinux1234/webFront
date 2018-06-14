@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 在图片预加载中我们把预加载图片的职责放到预加载对象中，把设置img标签跟预加载图片分成两个对象
+
+
+		var myImage=(function(){
+			var imgNode=document.createElement('img');
+			document.body.appendChild(imgNode);
+
+			return {
+				setSrc:function(src){
+					imgNode.src=src;
+				}
+			}
+		})();//只负责创建img标签
+
+
+
+		var proxyImage=(function(){
+			var img=new Image;
+
+			img.onload=function(){
+				myImage.setSrc(this.src);
+			}
+
+
+
+			return {
+				setSrc:function(src){
+					myImage.setSrc("http://img3.imgtn.bdimg.com/it/u=1770956967,3679195072&fm=11&gp=0.jpg");//预加载的图片
+					img.src=src;
+				}
+			}
+
+		})();
+
+
+		proxyImage.setSrc("http://img5.imgtn.bdimg.com/it/u=394265007,236680862&fm=200&gp=0.jpg");//最后加载后的图片
+	</script>
+</body>
+</html>

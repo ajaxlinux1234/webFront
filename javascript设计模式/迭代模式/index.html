@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	
+	// 1，内部迭代器就是提前制定好规则，与此迭代c器的交互也就一次
+	 var each=function(arr,callback){
+	 	for(var i=0;i<arr.length;i++){
+	 		callback.call(arr[i],i,arr[i]);
+	 	}
+	 }
+
+
+	 each([1,2,3],function(index,item){
+	 	console.log([index,item]);
+	 })
+
+
+	// 2.外部迭代器比内部迭代器调用时更复杂
+
+
+
+	var Interator=function(obj){
+		var current=0;
+
+		var next=function(){
+			current+=1;
+		}
+		var isDone=function(){
+			return current>=obj.length;
+		};
+
+		var getCurrItem=function(){
+			return obj[current];
+		}
+
+		return {
+			next:next,
+			isDone:isDone,
+			getCurrItem:getCurrItem
+		}
+	}
+
+	var compare=function(Interator1,Interator2){
+		while(!Interator1.isDone()&&!Interator2.isDone()){
+			if(Interator1.getCurrItem()!==Interator2.getCurrItem()){
+				throw new Error("Interator1和Interator2不相等");
+			}
+
+			Interator1.next();
+			Interator2.next();
+		}
+
+		console.log("Interator1和Interator2相等啊");
+	}
+
+
+	var Interator1=Interator([1,2,3,4]),
+		Interator2=Interator([1,2,3,6]);//
+
+
+		compare(Interator1,Interator2);
+
+
+
+</script>
+</html>

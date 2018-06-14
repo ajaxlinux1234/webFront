@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="file" id="file-upload-btn" multiple="multiple" value="文件上传">
+	<script src="fileUpload.js"></script>
+	<script>
+		var btn=document.getElementById('file-upload-btn');
+		// alert(Number("joijoj"));
+		btn.onchange=function(){
+			var _this=this,
+			   myFileArr=[],
+			   filesArr=objToArr(_this.files);	
+
+			filesArr.forEach(function(file){
+				var fileObj={};
+				
+				fileObj.fileName=file.name;
+			    fileObj.fileSize=file.size;
+
+			    myFileArr.push(fileObj);
+			})
+
+			window.startUpload('plugin',myFileArr);
+		  												     
+		}
+
+       function objToArr(obj){
+       		return [].slice.call(obj);
+       }
+		
+
+     // alert(isNaN(Number("jalkjajs")));
+	</script>
+</body>
+</html>

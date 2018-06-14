@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// Object.create()方法可以实现克隆，下面为兼容写法
+		Object.create=Object.create||function(obj) {
+			var F=function(){};
+			F.prototype=obj;
+			return new F();
+		}
+	</script>	
+</body>
+</html>

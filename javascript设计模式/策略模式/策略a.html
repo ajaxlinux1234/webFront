@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 策略模式指的是定义一系列的算法，把它们一个个封装起来。将不变的部分和变化的部分隔开是每个设计模式的主题，策略模式就是将算法的使用与算法的实现分开 -->
+
+	<script>
+		
+		var strategies={//可变的
+			"S":function(salary){
+				return salary*4;
+			},
+			"A":function(salary){
+				return salary*3;
+			},
+			"B":function(salary){
+				return salary*2;
+			}
+
+		}
+
+		var calculateBonus=function(level,salary){
+			return strategies[level](salary);
+		}
+
+
+		console.log(calculateBonus("S",20000));
+		console.log(calculateBonus("A",10000));
+	</script>
+</body>
+</html>

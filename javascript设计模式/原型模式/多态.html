@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多态</title>
+</head>
+<body>
+	<script>	
+		// 多态就是对不同的对象执行相同的操作而产生不同的效果
+
+		function action(animal) {
+			if(animal instanceof Duck){
+				console.log("嘎嘎嘎");
+			}else if(animal instanceof Chicken){
+				console.log("咯咯咯");
+			}
+		}
+
+
+		function Duck(){}
+		function Chicken(){}
+
+
+		action(new Duck());
+		action(new Chicken());
+		// //1.这样写的话加入我们要增加动物可能要无线改变action函数
+
+
+
+		// // 我们应该这样做，把不变的隔离起来，把可变的各自封装起来
+
+
+		// console.log("-----普通写法------");
+
+		console.time();
+		
+		function action2(animal){
+			animal.sound();
+		}
+
+
+		function Duck2(){}
+		function Chicken2(){}
+
+
+
+		Duck2.prototype.sound=function(){
+			console.log("嘎嘎嘎");
+		}
+
+		Chicken2.prototype.sound=function(){
+			console.log("咯咯咯");
+
+		}
+		
+		
+			action2(new Duck2());
+		    action2(new Chicken2());
+		   
+		
+		
+		console.timeEnd();
+		// //2.此时我们如果在想增加的话，只需要再封装构造函数，而不需要改变不变的函数action2
+
+		// console.log("-----把不变和变的进行封装的写法-----");
+
+		// //3.自己的想法
+
+		console.time();
+		
+			function animal(arr){
+				for(var i=0;i<arr.length;i++){
+					arr[i].action();
+				}
+			}
+
+
+		
+			animal([
+			  {name:"Duck",action:function(){
+			  		console.log(this.name+" is jiao");
+			  }},
+			  {name:"Chicken",action:function(){
+			  		console.log(this.name+" is eating");
+			  }}
+			])	
+	    
+		
+		console.timeEnd();
+		// console.log("---自己的想法----");
+
+
+
+			function Animal2(name,soundContent){
+				this.name=name;
+				this.soundContent=soundContent;
+			}
+
+			Animal2.prototype.sound=function(){
+				console.log(this.name+" is "+this.soundContent)
+			}
+
+
+
+			new Animal2("Duck","嘎嘎嘎").sound();
+			new Animal2("Chicken","咯咯咯").sound();
+
+
+
+	</script>
+</body>
+</html>

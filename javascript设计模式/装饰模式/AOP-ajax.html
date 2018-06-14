@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 假如我们网站有一天突然遭受CSRF攻击，这时候我们需要在原来ajax请求的代码中添加Token函数，这使得我们的代码很乱，因为假如我们要开源我们的ajax库，别人根本不需要Token函数，或者Token函数的实现方式不同，那么代码使用的体验度将非常的差，这时候我们可以用before函数
+
+
+		var before=function(fn,beforeFn){
+			return function(){
+				beforeFn.apply(this,arguments);
+
+				return fn.apply(this,arguments);
+			}
+		}
+
+
+		// Function.prototype.before=function(beforeFn){
+		// 	var _this=this;
+
+
+		// 	return function(){
+		// 		beforeFn.apply(this,arguments);
+
+		// 		return _this.apply(this,arguments);
+		// 	}
+		// }
+
+
+		var getToken=function(){
+			return "Token";
+		}
+
+		var ajax=function(type,url,param){
+			console.log(param);
+		}
+
+
+
+		var ajax=before(ajax,function(type,url,param){
+			param.Token=getToken();
+		})
+
+
+
+		ajax( 'get', 'http:// xxx.com/userinfo', { name: 'sven' } );
+	</script>
+</body>
+</html>

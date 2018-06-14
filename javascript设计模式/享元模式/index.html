@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	享元模式就是为了把对象的内部状态和外部状态分割开的，它的出现就是为了解决程序性能问题
+	我们通常再划分对象的内部状态和外部状态时：
+	1.内部状态储存与对象内部
+	2.内部状态可以被一些对象所共享
+	3.内部状态独立与具体场景，通常不会变化
+	4.外部状态取决于具体的场景，根据不同的场景而变化，外部状态不能共享
+	5.通常内部状态有几种组合模式，那么这个对象就有几种类型
+
+	<script>
+		// 模特来试衣服的案例，我们应该把sex定义为内部状态，而他们的穿着定义为外部状态
+		var Model=function(sex){
+			this.sex=sex;
+		}
+
+		Model.prototype.takePhoto=function(){
+			console.log("sex="+this.sex+"underware="+this.underware);
+		}
+		var maleModel=new Model("man"),
+			womanModel=new Model("woman");
+
+
+		// 加入男女衣服各有50种，那么
+
+		for(var i=0;i<=50;i++){//男模特
+			maleModel.underware="underware"+i;
+			maleModel.takePhoto();
+		}
+
+
+		for(var i=0;i<=50;i++){
+			womanModel.underware="underware"+i;
+			womanModel.takePhoto();		
+		}
+	</script>
+</body>
+</html>

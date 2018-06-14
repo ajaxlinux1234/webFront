@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="checkbox" id="1">1
+	<input type="checkbox" id="2">2
+	<input type="checkbox" id="3">3
+	<input type="checkbox" id="4">4
+	<input type="checkbox" id="5">5
+	<input type="checkbox" id="6">6
+	<input type="checkbox" id="7">7
+	<input type="checkbox" id="8">8
+	<input type="checkbox" id="9">9
+
+</body>
+<script>
+	  //第一种是假设当我们每次check时都向服务器发送请求，我们可能在一秒之内check很多项那么这将会增加服务器的压力
+
+
+	  // function sendToserver(data) {
+	  // 	console.log("数据已发送"+data);
+	  // }
+
+
+
+	  // var aCheck=document.getElementsByTagName("input");
+
+
+	  //  for(var i in aCheck){
+	  //  		aCheck[i].onclick=function(){
+	  //  			if(this.checked===true){
+	  //  			  sendToserver(this.id);
+	  //  			}
+	  //  		}
+	  //  }
+
+
+
+
+	  //第二种我们可以设置一个缓存数组，把数据存到数组中，在几秒之后再把缓存数组中缓存的数据一起发送到服务器，无论在数组中插入多少数据(也叫函数防抖)
+
+
+
+	 function sendToserver(data) {
+	  	console.log("数据已发送"+data);
+	  }
+
+
+	 var dataCache=(function(){
+	   var cache=[],
+	   	   timer;
+
+	   return function(data){
+	   		cache.push(data);
+	   		if(timer){
+	   			return;
+	   		}
+
+	   		timer=setTimeout(function(){
+	   			sendToserver(cache.join(','));
+	   			clearTimeout(timer);
+
+	   			timer=null;
+	   			cache.length=0;
+	   		},2000);
+	   }
+	 })();
+
+	   var aCheck=document.getElementsByTagName("input");
+
+
+	   for(var i in aCheck){
+	   		aCheck[i].onclick=function(){
+	   			if(this.checked===true){
+	   			  dataCache(this.id);
+	   			}
+	   		}
+	   }
+
+</script>
+</html>

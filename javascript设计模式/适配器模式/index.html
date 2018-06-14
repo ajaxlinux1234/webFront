@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 适配器模式是为把两个不同接口转化为相同的接口，从而不必重构原来的代码
+
+
+
+		// 例如我们在渲染广东省城市信息，第一次获得的接口
+
+
+		var getGuangdongCity=function(){
+			var guangdongCity=[     //第一次广东省城市的信息结构
+				{
+					name:"shenzhen",
+					id:11
+				},
+				{
+					name:'guangzhou',
+					id:12
+				}
+			]
+
+
+			return guangdongCity;
+		}
+
+
+
+
+		var render=function(cityInfoFn){
+			console.log("开始渲染广东省地图");
+			document.write(JSON.stringify(cityInfoFn())+'<br/>');
+		}
+
+
+
+		render(getGuangdongCity);
+
+
+		// 假如有一天我们发现了一个更全信息的广东省城市信息，但是数据结构不同({"shenzhen":11,"guangdong":12})，这时候我们可以写一个适配器把两种数据结构转化为相同的
+
+
+
+		var addressAdapter=function(oldAddressFn){
+			var address={},
+				oldAddress=oldAddressFn();
+
+
+			for(var i=0,c;c=oldAddress[i++];){
+				address[c.name]=c.id;
+			}
+
+
+			return function(){
+				return address;
+			}
+		}
+
+
+		render(addressAdapter(getGuangdongCity));
+
+
+		// 这时候就把原来的数据结构与现在的数据结构统一啦
+	</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		var Bevorage=function(param){
+			var boilWater=function(){
+				console.log("把水煮沸");
+			};
+
+			var brew=param.brew||function(){
+				throw new Error("必须重写brew方法");
+			};
+
+			var pourInCup = param.pourInCup || function(){
+			 throw new Error( '必须传递 pourInCup 方法' );
+			};
+			var addCondiments = param.addCondiments || function(){
+			 throw new Error( '必须传递 addCondiments 方法' );
+			};
+			var ifaddCondiments=param.ifaddCondiments||function(){
+				throw new Error( '必须传递 ifaddCondiments 方法' );
+			} 
+
+			var F=function(){};
+			F.prototype.init=function(){
+				 boilWater();
+				 brew();
+				 pourInCup();
+				 if(ifaddCondiments()){
+				 	addCondiments();
+				 }
+				  
+			};
+
+			return F;
+
+
+		}
+
+
+		var Coffee=Bevorage({
+			 brew: function(){
+			  console.log( '用沸水冲泡咖啡' );
+			 },
+			 pourInCup: function(){
+			  console.log( '把咖啡倒进杯子' );
+			 },
+			 addCondiments: function(){
+			  console.log( '加糖和牛奶' );
+			 },
+			 ifaddCondiments:function(){
+			 	return window.confirm("请问是否加糖和牛奶");
+			 } 
+		});
+		var coffee=new Coffee();
+		coffee.init();
+		// 在javascript中我们不必要照搬其它语言的模板方法，我们可以用高阶函数代替
+	</script>
+</body>
+</html>

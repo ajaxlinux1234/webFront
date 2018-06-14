@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 版本1代码
+
+		var getUploadObj = function(){
+			 try{
+			      return new ActiveXObject("TXFTNActiveX.FTNUpload"); // IE 上传控件
+			 }catch(e){
+				 if ( supportFlash() ){ // supportFlash 函数未提供
+				 var str = '<object type="application/x-shockwave-flash"></object>';
+				 return $( str ).appendTo( $('body') );
+				 }else{
+				 var str = '<input name="file" type="file"/>'; // 表单上传
+				 return $( str ).appendTo( $('body') ); 
+
+		   }
+		 }
+		}; 
+		//try catch和if else混在一起，可读性差显的很混乱
+
+
+
+		//版本二代码
+
+
+		var IEFileUpload=function(){
+			try{
+				return new ActiveXObject( "TXFTNActiveX.FTNUpload" );
+			}catch(e){
+				return false;
+			}
+		}
+
+
+		var getFlashUploadObj=function(){
+			if(supportFlash()){
+				var str='<object  type="application/x-shockwave-flash"></object>';
+				return $(str).appendTo($('body'));
+			}
+			return false;
+		}
+
+
+		var getFormUploadObj=function(){
+			 var str = '<input name="file" type="file" class="ui-file"/>'; // 表单上传
+             return $( str ).appendTo( $('body') ); 
+		}
+
+		var iteratorUploadObj = function(){
+			 for ( var i = 0, fn; fn = arguments[ i++ ]; ){
+			 var uploadObj = fn();
+			 if ( uploadObj !== false ){
+			 return uploadObj;
+			 }
+			 }
+		};
+       var uploadObj = iteratorUploadObj( getActiveUploadObj, getFlashUploadObj, getFormUpladObj ); 
+
+
+       // 这样重构之后显的代码更有结构,后期假如我们要拓展html5文件上传，不需要该其他插件上传代码，只需要写html5文件上传函数，添加到迭代器中
+	</script>
+</body>
+</html>

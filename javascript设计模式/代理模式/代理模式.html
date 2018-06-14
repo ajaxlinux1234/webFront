@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// xiaoming想向女神A送花,代理模式就是通过A的好闺蜜B，在适当的时候把花送给A
+
+
+		// 虚拟代理是xiaoming把买花的任务给B，B在女神A心情好的时候买花并送给A
+
+		function Flower(){}
+
+
+		var xiaming={
+			sendFlower:function(target) {
+				target.receiveFlower();
+			}
+		}
+
+
+
+		var B={
+			receiveFlower:function() {
+				A.listenGoodMood(function(){
+					var flower=new Flower();
+					A.receiveFlower(flower);
+				});
+			}
+		}
+
+
+		var A={
+			receiveFlower:function(flower){
+				console.log("收到花"+flower);
+			},
+			listenGoodMood:function(fn){//A在两秒后会有好心情
+				setTimeout(function(){
+					fn();
+				},2000);
+			}
+		}
+
+
+
+
+		xiaming.sendFlower(B);
+
+	</script>
+</body>
+</html>

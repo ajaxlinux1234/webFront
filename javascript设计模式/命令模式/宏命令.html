@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 宏命令就是根元素负责调用子元素，但是不操作子元素
+
+		var closeDoorCommand={
+			execute:function(){
+				console.log("close the door");
+			}
+		}
+
+		var openDoorCommand={
+			execute:function(){
+				console.log("open the door");
+			}
+		}
+
+		var openQQCommand={
+			execute:function(){
+				console.log("open the qq");
+			}
+		}
+
+
+		var MacroCommand={
+			commandList:[],
+			add:function(command){
+				this.commandList.push(command);
+			},
+			execute:function(){
+				this.commandList.forEach(function(item,index,array){
+					item.execute();
+				})
+			}
+		}
+
+
+
+		MacroCommand.add(closeDoorCommand);
+		MacroCommand.add(openDoorCommand);
+		MacroCommand.add(openQQCommand);
+
+
+
+		MacroCommand.execute();
+	</script>
+</body>
+</html>

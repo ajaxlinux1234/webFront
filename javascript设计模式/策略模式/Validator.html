@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="../foundation.min.css">
+	<style>
+		.username-error-msg,.password-error-msg,.phoneNum-error-msg{
+			color: red;
+		 	font-size: 10px;
+			
+		}
+
+
+
+	</style>
+</head>
+<body>
+	<form id="form1" action="" style="margin:50px auto;width: 400px;">
+		<div class="row">
+			<div class="large-8 columns"><label for="">请输入用户名<input type="text" name="username"></label></div>
+			<div class="large-4 columns username-error-msg"></div>	
+		</div>
+		<div class="row">
+			<div class="large-8 columns"><label for="">请输入密码<input type="password" name="password"></label></div>
+			<div class="large-4 columns  password-error-msg"></div>
+		</div>
+		<div class="row">
+			<div class="large-8 columns"><label for="">请输入手机号<input type="text" name="phoneNum"></label></div>
+			<div class="large-4 columns phoneNum-error-msg"></div>
+		</div>
+		<div class="row">
+			   <a href="javascript:;" class="button" style="margin-left: 160px;">提交</a>
+		</div>
+	</form>
+	
+		
+		
+	<script src="Validator.js"></script>
+	<script>
+	var usernameErrorMsg=document.getElementsByClassName("username-error-msg")[0];
+	var passwordErrorMsg=document.getElementsByClassName("password-error-msg")[0];
+	var phoneNumErrorMsg=document.getElementsByClassName("phoneNum-error-msg")[0];
+	var a=new Validator({
+			formId:"form1",
+			rules:[
+				  {name:"username",rule:'isNonEmpty',errorMsg:"用户名不能为空"},	
+				  {name:"password",rule:'minLength:10',errorMsg:"密码长度不能小于10"},	
+				  {name:"phoneNum",rule:'isMobile',errorMsg:"请输入正确的手机号"}
+			  ],
+			errorMsgShow:[usernameErrorMsg,passwordErrorMsg,phoneNumErrorMsg]
+
+		 }).start();
+	// console.log(a);
+	</script>
+</body>
+</html>

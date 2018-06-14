@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">按钮</button>
+	<script>
+		
+		// 在实际的开发中如果我们遇到一个这样的案例（点击按钮发送一次ajax请求）,我们可以在每次点击的时候先清除这个事件
+		var oBtn=document.querySelector('#btn');
+		oBtn.onclick=function(){
+			oBtn.onclick=null;
+			ajax();
+		}
+
+
+		function ajax(){
+			console.log("提交数据到服务器");
+		}
+
+	</script>
+</body>
+</html>

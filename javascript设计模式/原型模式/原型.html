@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// js中的跟对象是Object.prototype对象，他是一个空对象，我们在javascript中遇到的每个原型，实际上都是从Object.prototype继承而来的
+
+
+		var obj1=new Object(),obj2={};
+
+		console.log(Object.getPrototypeOf(obj1)===Object.prototype);
+		console.log(Object.getPrototypeOf(obj2)===Object.prototype);
+		console.log(Object.getPrototypeOf(new String()));
+
+
+		//__proto__为实例的属性,prototype为构造函数的属性
+
+		var a=new Object();
+
+		console.log(a.__proto__===Object.prototype);
+	</script>
+</body>
+</html>

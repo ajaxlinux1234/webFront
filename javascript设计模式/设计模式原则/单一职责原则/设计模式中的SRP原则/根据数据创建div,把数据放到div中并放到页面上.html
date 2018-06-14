@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+
+		//原始代码
+
+
+		var appendDiv=function(data){
+			for(var i=0,l=data.length;i<l;i++){
+				var div=document.createElement('div');
+
+				div.innerHTML=data[i];
+				document.body.appendChild(div);
+			}
+		}
+
+
+		// appendDiv([1,2,3,4]);
+
+
+		// alert(Object.prototype.toString.call([]));
+
+
+		// 假如有一天返回的data是object结构，那么我们还需要改变appendDiv中的代码。我们应该把数据的迭代与dom的渲染分开
+
+		// 迭代器模式的目的就是把数据的迭代与其它操作分开
+
+
+		var each=function(obj,callback){	
+
+			if(Object.prototype.toString.call(obj)==="[object Array]"){//如果迭代的是数组
+				 for(var i=0;i<obj.length;i++){
+				 	callback.call(obj[i],i,obj[i]);
+				 }
+			}
+
+			if(Object.prototype.toString.call(obj)==="[object Object]"){//如果迭代的是对象
+				for(var i in obj){
+					callback.call(obj[i],i,obj[i]);
+				}
+			}
+
+			return obj;
+		}
+
+
+
+		// 改写appenDiv
+
+
+		var appendDiv=function(data){
+			each(data,function(i,n){
+				var div = document.createElement( 'div' );
+					div.innerHTML = n;
+					document.body.appendChild( div ); 
+			});
+		};
+
+		appendDiv( [ 1, 2, 3, 4, 5, 6 ] );
+        appendDiv({a:1,b:2,c:3,d:4} );
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="book.js"></script>
+	<script>
+		// 我们在借书时，有很多的信息，如果每本书我们都创建一个对象，那么在管理成千上万本书的时候将非常消耗内存,这时候我们就可以把书公共的部分（内部状态）提取出来，不同的部分（外部状态）放在外面管理
+
+
+		//1.传统的写法
+
+
+		var Book = function( id, title, author, genre, pageCount,publisherID, ISBN, checkoutDate, checkoutMember, dueReturnDate,availability ){
+		   this.id = id;
+		   this.title = title;
+		   this.author = author;
+		   this.genre = genre;
+		   this.pageCount = pageCount;
+		   this.publisherID = publisherID;
+		   this.ISBN = ISBN;
+		   this.checkoutDate = checkoutDate;
+		   this.checkoutMember = checkoutMember;
+		   this.dueReturnDate = dueReturnDate;
+		   this.availability = availability;
+		};
+		Book.prototype = {
+		   getTitle:function(){
+		       return this.title;
+		   },
+		   getAuthor: function(){
+		       return this.author;
+		   },
+		   getISBN: function(){
+		       return this.ISBN;
+		   },
+		/*其它get方法在这里就不显示了*/
+
+		// 更新借出状态
+		updateCheckoutStatus: function(bookID, newStatus, checkoutDate,checkoutMember, newReturnDate){
+		   this.id  = bookID;
+		   this.availability = newStatus;
+		   this.checkoutDate = checkoutDate;
+		   this.checkoutMember = checkoutMember;
+		   this.dueReturnDate = newReturnDate;
+		},
+		//续借
+		extendCheckoutPeriod: function(bookID, newReturnDate){
+		    this.id =  bookID;
+		    this.dueReturnDate = newReturnDate;
+		},
+		//是否到期
+		isPastDue: function(bookID){
+		   var currentDate = new Date();
+		   return currentDate.getTime() > Date.parse(this.dueReturnDate);
+		 }
+		};
+
+
+	</script>
+</body>
+</html>

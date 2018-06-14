@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">按钮1</button>
+	<script>
+		
+		// 我们在实际的分工协作开发中，如果需要修改别人的函数，直接在人家的函数上修改违反开放-封闭的原则，所以我们要引入装饰者模式
+
+
+		//1. 假如我们需要修改document.getElementById函数,第一种方案
+
+
+
+		// var _getElementById=document.getElementById;
+
+
+		// document.getElementById=function(){
+		// 	alert(1);
+		// 	// console.log(this);
+		// 	return _getElementById.apply(document,arguments);
+		// }
+
+
+		// var btn=document.getElementById("btn");
+
+		// console.log(btn);
+
+
+		// 第一种方案我们发现很不方便
+
+
+
+
+		//2. 由此我们引入第二种方案利用AOP来包装
+
+
+
+
+		// Function.prototype.before=function(beforeFn){
+		// 	var _this=this;//保持对原函数的引用
+		// 	return function(){
+		// 		beforeFn.apply(this,arguments);//新函数在原函数之前执行
+		// 		return _this.apply(this,arguments);
+		// 	}	
+		// }
+
+
+
+
+		// document.getElementById=document.getElementById.before(function(){
+		// 	alert(1);
+		// });
+
+
+		// var btn=document.getElementById("btn");
+
+
+
+		// console.log(btn);
+
+
+		// 这种方法虽然与上边的方法相比有所改进，但是很多人不喜欢这种污染原型的方法
+
+
+		// 3.我们可以自己写个函数把原函数和before函数都作为参数传进去
+
+
+
+		var before=function(fn,beforeFn){
+			return function(){
+				beforeFn.apply(this,arguments);
+
+				return fn.apply(this,arguments);
+			}
+		};
+
+
+		var a=before(
+			function(){alert(3)},
+			function(){alert(2)}
+			)
+
+		var b=before(a,function(){alert(1)});
+
+
+
+		b();//依次会弹出1,2,3
+	</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		Function.prototype.after = function( fn ){
+		 var p=1;
+		 console.log(this);
+		 console.log(Object.prototype.toString.call(this));
+		 var self = this;
+		 return function(){
+		 var ret = self.apply( this, arguments );
+		 if ( ret === 'nextSuccessor' ){
+		 return fn.apply( this, arguments );
+		 }
+		 return ret;
+		 }
+		}; 
+
+
+		var fn1=new Function();
+		fn1.after();
+
+
+
+
+		var Person=function(){}
+
+
+		Person.prototype.sayName=function(){
+			console.log(this);
+		}
+
+		var person=new Person();
+		person.sayName();
+	</script>
+</body>
+</html>

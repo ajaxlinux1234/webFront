@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 选择颜色: <select id="colorSelect">
+	 <option value="">请选择</option>
+	 <option value="red">红色</option>
+	 <option value="blue">蓝色</option>
+	 </select>
+	 选择内存: <select id="memorySelect">
+	 <option value="">请选择</option>
+	 <option value="32G">32G</option>
+	 <option value="16G">16G</option>
+	 </select>
+	 输入购买数量: <input type="text" id="numberInput"/><br/>
+	 您选择了颜色: <div id="colorInfo"></div><br/>
+	 您选择了内存: <div id="memoryInfo"></div><br/>
+	 您输入了数量: <div id="numberInfo"></div><br/>
+	 <button id="nextBtn" disabled="true">请选择手机颜色和购买数量以及内存</button> 
+	<script>
+		
+		// 中介者可以把原来对象之家的网状对应结果转化为一对多的结构，好处：使得对象之间基本没有耦合度，我们改变需求，只需要改变中介者对象。坏处：会多出来一个对象。在实际的开发过程中，如果根据实际情况选择是否用中介者模式进行代码的重构
+
+
+		// 我们以一个买家购买手机的案例进行代码的重构
+
+
+
+		var goods={
+			"red|32G": 3,
+			 "red|16G": 0,
+			 "blue|32G": 1,
+			 "blue|16G": 6 
+		};
+
+		// 添加中介者对象
+
+		var mediator=(function(){
+			var colorSelect = document.getElementById( 'colorSelect' ),
+				 memorySelect = document.getElementById( 'memorySelect' ),
+				 numberInput = document.getElementById( 'numberInput' ),
+				 colorInfo = document.getElementById( 'colorInfo' ),
+				 memoryInfo = document.getElementById( 'memoryInfo' ),
+				 numberInfo = document.getElementById( 'numberInfo' ),
+				 nextBtn = document.getElementById( 'nextBtn' ); 
+
+
+			return {
+				changed:function(obj){
+					var color=colorSelect.value,
+						memory=memorySelect.value,
+						number=numberInput.value;
+
+					obj===colorSelect?
+					colorInfo.innerHTML=color:
+					obj===memorySelect?
+					memoryInfo.innerHTML=memory:
+					numberInfo.innerHTML=number;
+
+
+					if(!color){
+						nextBtn.disabled=true;
+						nextBtn.innerHTML="请选择手机颜色";
+						return;
+					}
+
+					if(!memory){
+						nextBtn.disabled=true;
+						nextBtn.innerHTML="请选择手机内存";
+						return;
+					}
+
+
+				    if(((number-0)|0)!==number-0){
+				    	nextBtn.disabled=true;
+						nextBtn.innerHTML="请选择手机数量";
+						return;
+				    }
+
+
+				    nextBtn.disabled="false";
+				    nextBtn.innerHTML="放入购物车";
+
+				}	
+			}	 
+
+		})();
+
+
+
+		// 事件函数
+
+		colorSelect.onchange=function(){
+			mediator.changed(this);
+		}
+
+		memorySelect.onchange=function(){
+			mediator.changed(this);
+		}
+
+
+		numberInput.oninput=function(){
+			mediator.changed(this);
+		}
+
+	</script>
+</body>
+</html>
