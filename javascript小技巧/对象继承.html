@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>面向对象(2)原型链探索,对象不为人知的私有成员</title>
+ </head>
+ <body>
+  <script>
+       //构造函数   Person  父类
+       function Person(name,age){
+           // console.log(this)
+              this.name=name;   //属性
+              this.age=age;
+       }
+ 
+       Person.prototype={     //方法    {}   实例对象
+            eat:function(){
+                console.log(this.name+"正在吃饭");
+            },
+            sang:function(){
+                console.log(this.name+"正在唱歌");
+            }
+       }
+        var max=new Person("max",30);   //1创建实例   2:调用
+           //max.eat();   name    max
+         
+ 
+ 
+         //构造函数   Student  子类
+         function Student(name,age){ 
+             Person.call(this,name,age);   //this   Student
+         }
+         //Student.prototype=Person.prototype;
+         for(var key in Person.prototype){   //  “可枚举属性”
+              Student.prototype[key]=Person.prototype[key];
+          }
+           
+         Student.prototype=new Person();   //原型链
+             
+          
+          // var wwj=new Student("王文杰",15);   //1创建实例   2:调用
+                 
+ 
+        Student.prototype.school=function(){
+                console.log(this.name+"正在上学");
+        };
+          // wwj.sang();
+
+
+          console.log(new Student());
+
+          console.log(new Person().__proto__);
+ 
+          // console.log(Person.prototype.constructor)
+    //       Object.prototype.work=function(){
+    //              console.log("1111")
+    //       }
+ 
+    //         function  fn(){
+ 
+    //         }
+    //         var str="222";
+    //          str.work();
+    //          fn.work();    //函数对象
+    //       //wwj.work();
+    //       // console.log(Object.prototype.__proto__)
+    //      //Student.school   功能
+    //      //1继承属性   2 继承方法
+    //        var  obj={
+    //               name:"max",
+    //               age:30,
+    //               height:175
+    //         }
+ 
+    //         for(var key in obj){   //遍历 数组  对象  “可枚举属性”
+    //               console.log(key)    //属性
+    //               console.log(obj[key])  //值
+    //         }
+ 
+ 
+    //     原型链      =》  对象    函数对象   Object.prototype.extends
+ 
+    //     子类  extends   父类
+        
+       
+    //     var obj={};    //{}Object   Object
+    //       console.log(obj.__proto__);   //Object
+    //       function fn(){
+ 
+    //       }
+    //       //console.log(fn.prototype);  构造函数 原型对象
+    //       //console.log(fn.__proto__); 函数对象  function
+    //       //console.log(Object.__proto__);  //函数对象     function
+    //      // console.log(Object.prototype);   //构造函数    object
+    //      console.log(Object.__proto__===Function.prototype);
+       
+    // Object.prototype.a=function(){
+    //       alert(1)
+    // }
+    // Function.prototype.b=function(){    //Function
+    //      alert(2)
+    // }
+ 
+    // function fn(){
+ 
+    // }
+    // //fn.prototype={}   默认  Object
+    //     var f=new fn();   //1 f fn的实例对象出现
+    //        // f.b();
+    //         f.a();  
+       
+  
+    
+  </script>
+ </body>
+</html>

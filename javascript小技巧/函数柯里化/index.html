@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 假如我们要计算程序员一个月加班的总时间，那么需要把每天加班的时间加起来
+
+
+		// 通常我们想的是这样计算
+
+
+		var monthTime=0;
+
+		function fn1(time){
+			return monthTime+=time;
+		}
+
+
+		console.log(fn1(1.1));
+		console.log(fn1(2.2));
+		// 试想假如数据量很大的情况下这样是非常耗费性能的
+
+
+		// 函数的柯里化就是设置一个缓存池，等到相应的条件下一次性计算缓存中所有值的结果
+
+
+		var fn2=(function(){
+			var cache=[];
+
+			return function(){
+				if(arguments.length===0)//程序终止条件（程序员不再加班）
+				{
+					var time=0;
+					for(var i=0;i<cache.length;i++){
+						time+=cache[i];
+					}
+
+					return time;
+				}else{
+					[].push.apply(cache,arguments);
+				
+				}
+			}
+		})();
+
+
+		fn2(1);
+		fn2(2);
+
+		console.log(fn2());
+	</script>
+</body>
+</html>

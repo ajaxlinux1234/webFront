@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 有一个大数组,var a = ['1', '2', '3', ...];a的长度是100,内容填充随机整数的字符串.请先构造此数组a,然后设计一个算法将其内容去重
+
+
+		function fillArr(arr,start,end){//数组填充
+			start=start==undefined?1:start;
+			end=end==undefined?100:end;
+			var arrWidth;
+			if(end<=start){
+			   end = start + 100;
+			}
+			
+			arrWidth=end-start;
+			for(var i=0;i<100;i++){
+				arr.push(''+(Math.floor(Math.random()*arrWidth)+start));
+			}
+
+
+			return arr;
+		}
+
+
+
+		function normalize(arr){//数组去重
+			if(arr&&Array.isArray(arr)){
+				var map={};
+
+				for(var i=arr.length;i>=0;i--){
+					if(map[arr[i]]){
+						arr.splice(i,1);
+					}else{
+						map[arr[i]]=true;
+					}
+				}
+			}
+
+
+			return arr;
+		}
+
+		   var input = [];
+		    fillArr(input, 1, 100);
+		    input.sort(function (a, b) {
+		        return a - b;
+		    });
+		    console.log(input);
+
+		    normalize(input);
+		    console.log(input);
+	</script>
+</body>
+</html>

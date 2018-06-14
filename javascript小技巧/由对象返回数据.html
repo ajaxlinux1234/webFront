@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		function Obj(argument) {
+			return this.start();
+		}
+
+		Obj.prototype.start=function(){
+			return "1";
+		}
+
+
+
+		var obj=new Obj();
+
+		console.log(obj.start());
+	</script>
+</body>
+</html>

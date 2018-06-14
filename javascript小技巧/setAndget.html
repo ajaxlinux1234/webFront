@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setAndget</title>
+</head>
+<body>
+	<script>
+		var age=18;
+	    var Person={
+			get age(){
+				return age;
+			},
+			set age(value){
+				age=value>100?(new Date().getFullYear()-value):value;
+			}
+	    }
+
+
+	    Person.age=1994;
+	    console.log(Person.age);
+	    Person.age=14;
+	    console.log()
+	</script>
+</body>
+</html>

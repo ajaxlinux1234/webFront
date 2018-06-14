@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+	// 现有一个Page类,其原型对象上有许多以post开头的方法(如postMsg);另有一拦截函数chekc,只返回ture或false.请设计一个函数,该函数应批量改造原Page的postXXX方法,在保留其原有功能的同时,为每个postXXX方法增加拦截验证功能,当chekc返回true时继续执行原postXXX方法,返回false时不再执行原postXXX方法
+
+
+
+	// 本题其实为适配器模式的应用，我们写一个after函数
+
+	function Page(){}
+
+
+
+	Page.prototype={
+		postA:function(){
+			console.log("a");
+		},
+		postB:function(){
+			console.log('b');
+		},
+		check:function(){
+			return Math.random()>0.5
+		}
+	}
+	function after(oldFn,newFn,condition){
+		if(condition){
+			oldFn();
+			newFn();
+		}else{
+			oldFn();
+		}
+
+	}
+
+
+
+	function myNewFn(){
+		console.log("这是条件符合时增加的函数");
+	}
+
+
+
+	var page1=new Page();
+	after(page1.postA,myNewFn,page1.check());
+
+	</script>
+	
+</body>
+</html>

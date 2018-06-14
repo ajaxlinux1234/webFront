@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var obj1={
+
+		};
+
+		console.log(typeof new Function());
+		console.log(typeof new String());
+		console.log(typeof new Boolean());
+		console.log(typeof new Number());
+		console.log(typeof new Array());
+		console.log(typeof new Object());
+		
+
+		console.log("--------------------");
+		console.log(new Function().__proto__.__proto__.constructor);
+		console.log(new String().__proto__.__proto__.constructor);
+		console.log(new Array().__proto__.__proto__.constructor);
+		
+		
+	</script>
+</body>
+</html>

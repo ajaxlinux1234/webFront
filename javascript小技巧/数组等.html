@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+    // 计算数组的最大值和最小值
+    
+
+    function maxAndmin(arr){
+      return {
+      	"max":Math.max.apply(Math,arr),
+      	"min":Math.min.apply(Math,arr)
+      }
+
+    }
+
+
+    console.log(maxAndmin([1,2,3,9,6]));
+
+    //迭代arguments
+    
+
+    function outPutArguments(){
+    	[].forEach.call(arguments,function(val,key){
+    		console.log(key,val);
+    	})
+    }
+
+
+
+
+    outPutArguments("aha","enheng");
+</script>
+</html>

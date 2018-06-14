@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+
+		// 在一个包含数组或者整数的数组中，我们通过最外层数组判断内容如果是整数，就放到result数组中，否则就递归调用
+
+		var data =  [1, [2, [ [3, 4], 5], 6],[[[[[7]]]]]];
+		function flat(data,result){
+			for(var i=0,len=data.length;i<len;i++){
+				typeof(data[i])==="number"?
+					  result.push(data[i]):
+					  flat(data[i],result);
+			}
+
+			return result;
+		}
+
+
+		var result=[];
+
+
+		console.log(flat(data,result));
+	</script>
+</body>
+</html>

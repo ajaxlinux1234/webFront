@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		Function.prototype.uncurring=function(){
+			var _this=this;
+
+			return function(){
+				var obj=Array.prototype.shift.call(arguments);//把返回函数的第一个值截掉，剩下第二个值
+
+				return _this.apply(obj,arguments);
+			}
+		}
+	</script>
+</body>
+</html>

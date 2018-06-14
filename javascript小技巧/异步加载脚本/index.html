@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="async.js"></script>
+	<script>
+		// var newScript=document.createElement('script');
+
+		// newScript.onload=function(){
+		// 	console.log("tag has been loaded");
+		// 	newScript.src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js";
+		// }
+
+
+
+
+		// document.getElementsByTagName('head')[0].appendChild(newScript);
+        
+
+        asyncLoaded("http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js",function(){
+        	console.log("异步脚本加载完成");
+        })
+
+
+        // 为了保证代码的执行顺序我们需要在上一个asyncLoaded中的回调函数中加载另一资源
+
+
+        asyncLoaded('http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js',function(){
+        	asyncLoaded("http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js",function(){
+        		asyncLoaded("http://apps.bdimg.com/libs/vue/1.0.14/vue.js",function(){
+        			console.log("全部加载完毕");
+        		});
+        	})
+        })
+	</script>
+</body>
+</html>

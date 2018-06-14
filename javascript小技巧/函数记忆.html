@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	// function add(a,b,c){
+	// 	return a+b+c;
+	// }
+
+	// function memorize(f){
+	// 	var cache={};
+
+	// 	return function(){
+	// 		var key=arguments.length+Array.prototype.join.call(arguments,",");
+
+	// 		if(key in cache){
+	// 			return cache[key];
+	// 		}else return cache[key]=f.apply(this,arguments);
+	// 	}
+	// }
+
+
+	// // var add=function(a,b,c){
+	// // 	return a+b+c;
+	// // };
+	// console.time('not use memorize');
+
+	// for(var i=0;i<100000;i++){
+	// 	add(1,2,3);
+	// }
+
+	// console.timeEnd("not use memorize");
+
+	
+	// var memorizeAdd=memorize(add);
+
+
+	// console.time('use memorize');
+
+
+	// for(var i=0;i<100000;i++){
+	// 	memorizeAdd(1,2,3);
+	// }
+
+	// console.timeEnd('use memorize');
+	
+
+
+	//1记忆函数（判断返回bool值，为奇数时返回true,否则返回false）
+	
+	let isPrime=(function(){
+		let hash={
+			8:true,
+			7:false
+		};
+
+		let isPrime=(n)=>{
+			if(n<3){
+				return true;
+			}else if(hash[n]!==undefined){
+				return hash[n];
+			}else{
+				for(let i=2;i<Math.sqrt(n);i++){
+					if(n%i==0){
+						return hash[n]=false;
+					}
+				}
+				return hash[n]=true;
+			}
+		}
+		return isPrime;
+	})();
+
+
+
+	// 2.普通函数
+	
+
+	let isPrime1=(n)=>{
+		if(n<3){
+			return true;
+		}else{
+			for(let i=2;i<Math.sqrt(n);i++){
+				if(n%i==0){
+					return false
+				}
+			}
+			return true;
+		}
+	}
+
+
+
+	let array=[];
+	for(let i=0;i<100000;i++){
+		array.push(parseInt(Math.random()*1100));
+	}
+
+
+	// 没有带函数记忆的
+	
+
+	console.time("isPrime1");
+	for(let i=0;i<array.length;i++){
+		isPrime1(array[i]);
+	}
+	console.timeEnd("isPrime1");
+
+    // 带函数记忆的
+	console.time("isPrime");
+	for(let i=0;i<array.length;i++){
+		isPrime(array[i]);
+	}
+	console.timeEnd("isPrime");
+
+
+
+
+
+
+	
+	</script>
+</body>
+</html>

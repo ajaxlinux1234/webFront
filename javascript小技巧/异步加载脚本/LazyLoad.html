@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="LazyLoad.js"></script>
+	<script>
+		// 我们在加载多个脚本资源时,可以
+
+		LazyLoad.js(["http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js","http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"],function(){
+			console.log("success");
+		})
+
+	</script>
+</body>
+</html>
