@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 当Symbol作为属性名时,不会出现在for...in，for...of中，也不会Object.keys(),Object.getOwnPropertyNames(),JSON.stringify()等方法返回。必须用Object.getOwnPropertySymbols()或者用Reflect.ownKeys()方法返回包括Symbol属性名在内的所有的属性和方法
+		let obj = {
+		  [Symbol('my_key')]: 1,
+		  enum: 2,
+		  nonEnum: 3
+		};
+
+		console.log(Reflect.ownKeys(obj));
+		console.log(Object.getOwnPropertySymbols(obj));
+		// 2.由此我们可以利用此特性为对象定义一些非私有的常规方法不能获取到的内部方法
+	</script>
+</body>
+</html>

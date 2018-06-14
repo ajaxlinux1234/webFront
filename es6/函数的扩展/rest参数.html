@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// rest参数是一个数组，arguments是一个类数组，用rest重构更容易
+
+
+
+		function add(...values){
+			let num=0;
+
+			for(let i in values){
+				num+=values[i];
+			}
+
+
+			return num;
+		}
+
+
+		console.log(add(1,2,3,4));
+
+
+		function sortNumbers1(){
+			return Array.prototype.slice.call(arguments).sort();
+		}
+
+
+		const sortNumbers2=(...number)=>number.sort();
+
+
+
+
+		// 我们来改写array的push方法,注意...rest后不能再有参数，否则就会报错
+
+
+
+		function push(arr,...items){
+			items.forEach(function(item){
+				arr.push(item);
+				console.log(item);
+			})
+		}
+
+		var a=[];
+		push(a,1,2,3)
+		console.log(a);
+	</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 函数的length属性是总共的参数减去有默认值的参数，有两种特殊情况：
+		// 	1.rest参数,其length为0
+		// 	2.赋默认值的参数没有在参数的最后，会省略后面的
+
+
+		console.log((function(x,y,z=4){}).length);
+		console.log((function(...arg){}).length);
+		console.log((function(x,y=4,z){}).length);
+	</script>
+</body>
+</html>

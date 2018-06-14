@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 在一个函数中多次出现同一个字符串，与代码形成强耦合，为了养成良好的代码习惯我们应该把这个字符串赋值给一个变量
+
+
+		function getArea(shape, options) {
+		  let area = 0;
+
+		  switch (shape) {
+		    case 'Triangle': // 魔术字符串
+		      area = .5 * options.width * options.height;
+		      break;
+		    /* ... more code ... */
+		  }
+
+		  return area;
+		}
+
+		getArea('Triangle', { width: 100, height: 100 }); // 魔术字符串
+
+
+
+
+		// 下面我们利用Symbol进行改进
+
+
+
+        const shapeType = {
+		  triangle: Symbol()
+		};
+
+
+		function getArea2(shape, options) {
+		  let area = 0;
+
+		  switch (shape) {
+		    case shapeType.triangle: // 魔术字符串
+		      area = .5 * options.width * options.height;
+		      break;
+		    /* ... more code ... */
+		  }
+
+		  return area;
+		}
+
+		getArea(shapeType.triangle, { width: 100, height: 100 }); // 魔术字符串
+	</script>
+</body>
+</html>

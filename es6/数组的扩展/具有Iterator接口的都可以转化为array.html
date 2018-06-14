@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<script>
+		//1任何具有Iterator接口的都可以转化为数组
+		var aDiv=document.querySelectorAll('div');
+
+		var divArr=[...aDiv];
+		// 2对于没有Iterator接口的类似数组的对象，不能用上述方法进行转换,例如
+		let arrLike={
+			'0':'a',
+			'1':'b',
+			"length":2
+		}
+		//3.Map和set结构，可以转换
+		let map=new Map([
+				[1,"one"],
+				[2,"two"],
+				[3,"three"]
+			]);
+
+
+		let mapArr=[...map.keys()];
+
+		// 4.Generator函数也可以转换
+
+
+		const go=function*(){
+			yield 1;
+			yield 2;
+			yield 3;
+		}
+
+		console.log(...go());
+	</script>
+</body>
+</html>

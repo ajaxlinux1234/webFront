@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.设置参数为不可省略的
+		function throwIfMissing() {
+		  throw new Error('Missing parameter');
+		}
+
+		function foo(mustBeProvided = throwIfMissing()) {
+		  return mustBeProvided;
+		}
+
+		foo("小明");//必须传入参数，否则会报错
+
+		// 2.设置参数为undefined时，表示此参数是可以省略的
+
+		function foo(optional = undefined) { ··· }
+	</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.箭头函数返回时多于一条语句要用()括起来
+		// 2.如果箭头返回一个对象，也必须加括号
+		// 3.我们可以与解构赋值相结合
+
+		const fn=({first=0,last=10})=>first+''+last;
+
+
+		console.log(fn(4,5));
+
+		// 4.也可以与...rest相结合，例如把函数参数转化为数组并返回
+
+		const numbers=(...nums)=>nums;
+		// 5.注意点在箭头函数内部没有this，函数中的this实际上是上级作用域中的this,它其中也没有arguments,super,target,也不能使用call(),apply()，出于这个特性我们可以非常方便的做很多事
+
+
+		function Timer(){
+			this.s1=0;
+			this.s2=0;
+			setInterval(()=>this.s1++,1000);
+
+
+			setInterval(function(){
+				return this.s2++;
+			},1000);
+		}
+
+
+		var time=new Timer();
+		seTimeout(()=>console.log("s1",time.s1),3100);
+		seTimeout(()=>console.log("s2",time.s2),3100);
+
+
+		var handler = {//利用这个特性我们可以方便的封装函数
+		  id: '123456',
+
+		  init: function() {
+		    document.addEventListener('click',
+		      event => this.doSomething(event.type), false);
+		  },
+
+		  doSomething: function(type) {
+		    console.log('Handling ' + type  + ' for ' + this.id);
+		  }
+		};
+	</script>
+</body>
+</html>

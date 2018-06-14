@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// ==在比较时会发生隐式类型转换，===在比较+0和-0以及NaN和NaN不正确,Object.is与===类似但完善了这两个比较
+
+
+		console.log(Object.is(+0,-0));
+		console.log(Object.is(NaN,NaN));
+	</script>
+</body>
+</html>

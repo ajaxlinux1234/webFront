@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 我们来看一个复杂的荔枝
+
+
+
+		var x=1
+
+
+		function foo(x,y=function(){x=2}){//foo的参数会形成一个作用域,所以当执行y时,参数作用域中x=2,但是其不影响内部作用域中x=3和全局作用域x=1
+			var x=3;
+			y();
+			console.log(x);
+		}
+
+		foo();//x=3
+
+		function foo2(x,y=function(){x=2}){//当去除var后，内部参数向上查询，这时候与参数作用域中x是一致的，外部作用域任然不受影响
+			x=3;
+			y();
+			console.log(x);
+		}
+		foo2();//x=2
+	</script>
+</body>
+</html>

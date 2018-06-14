@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// ...[]是...rest的逆运算，就是把数组转化为参数
+
+
+		console.log(...[1,2,3]);
+		// 改写push方法
+		function push(array, ...items) {
+		  array.push(...items);
+		}
+
+		let a=[];
+
+		push(a,1,2,3);
+
+		console.log(a);
+
+
+		function f(v, w, x, y, z) { }
+		const args = [0, 1];
+		f(-1, ...args, 2, ...[3]);
+	</script>
+</body>
+</html>

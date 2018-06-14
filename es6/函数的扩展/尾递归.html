@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 在函数中使用递归是有很大的风险的，不过在函数尾部进行递归因为只存在一个调用祯，所以不会发生栈溢出的情况,ES6 中只要使用尾递归，就不会发生栈溢出，相对节省内存。
+
+
+		let factorial=(n)=>{//复杂度为O(n)
+			if(n===1) return 1;
+			return n*factorial(n-1);
+		}
+
+
+		let factorial2=(n,total)=>{//复杂度O(1)
+			if(n===1) return total;
+			 return factorial2(n - 1, n * total);
+		} 
+
+		console.log(factorial(5));
+		console.log(factorial2(5));
+	</script>
+</body>
+</html>

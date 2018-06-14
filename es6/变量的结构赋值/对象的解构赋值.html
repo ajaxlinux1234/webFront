@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 我们也可对对象进行解构赋值，当然数组作为特殊的对象也可以对象的形式进行解构赋值,为了避免块级作用域，我们可以在赋值时加上（）
+
+
+
+		let {log,sin,cos}=Math;//这时候我们就把Math对象的三个方法赋值给了3个变量，具有很好的实用性
+
+		console.log(log(4));
+
+
+		let x;
+		({x}={x:1});
+
+
+		console.log(x);
+
+
+		let arr=[1,2,3];
+
+		let {0:first,[arr.length-1]:last}=arr;
+		console.log(first);
+		console.log(last);
+	</script>
+</body>
+</html>

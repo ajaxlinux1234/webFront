@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.函数参数与解析赋值相结合，实际案例
+
+
+
+		function fetch1(url,{body="",method="GET",headers={}}){
+			console.log(method);
+		}
+
+		// 此方法应该这样传参，也就是说没有默认值时一定要传值否则会报错
+
+
+		fetch1("http://www.baidu.com",{});
+
+		function fetch2(url,{body="",method="GET",headers={}}={}){
+			console.log(method);
+		}
+
+
+		fetch2("http://www.baidu.com");//有默认值的时候直接这样传就可以
+
+
+		// 2.在参数的赋值时，如果我们想默认值生效这时我们传入undefined就可以拉
+
+
+		function f(x,y=5,z){
+			return [x,y,z];
+		}
+
+
+		console.log(f(1,undefined,6));
+
+	</script>
+</body>
+</html>

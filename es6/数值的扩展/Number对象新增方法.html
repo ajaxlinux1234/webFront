@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.Number.isFinite(),和Number.isNaN()分别用来检查一个数值是否是有限的，和用来检查一个数值是否为空，这两个新方法只对数值有效,不是数值都会返回false
+		console.log(Number.isFinite(25));
+		console.log(Number.isNaN(25));
+		// 2.将全局方法parseInt和parseFloat这两个方法移植到Number对象上，为了逐步实现模块化
+
+
+		console.log(Number.parseInt===parseInt);
+		console.log(Number.parseFloat===parseFloat);
+		// 3.Number.isInteger()判断一个数是否为整数，对于精度要求高的不建议使用
+
+		// 4.Number.EPSILON为浮点数计算所接受的最小误差，也就是说如果两个数误差在这个范围内就可以认为是相等的
+
+
+		console.log(Number.EPSILON=== Math.pow(2, -52));//这个数与2的-52次方相等
+		// 5.ES6 引入了Number.MAX_SAFE_INTEGER和Number.MIN_SAFE_INTEGER这两个常量，用来表示js所能表示的整数的上限和下限
+		// Number.isSafeInteger方法用来判断一个一个数是否是安全范围内的整数
+
+
+		console.log(Number.isSafeInteger(4));
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 字符串解构赋值转化为一个类似数组的对象
+
+		const [a,b,c,d,e]="hello";
+
+
+		console.log(a)
+		console.log(b)
+		console.log(c)
+		console.log(d)
+		console.log(e)
+
+
+		// 类似数组的对象有一个length属性，因此还可以对这个属性进行解构赋值
+
+
+		const {length:len}="hello";
+
+
+		console.log(len);
+	</script>
+</body>
+</html>

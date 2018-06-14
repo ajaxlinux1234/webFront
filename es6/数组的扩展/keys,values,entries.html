@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// keys为数组的key的集合，values为数组的value的集合，entries为两者的集合
+
+
+
+		for(let index of ['a','b'].keys()){
+			console.log(index);
+		}
+
+		// for(let val of ['a','b'].values()){
+		// 	console.log(val)
+		// }
+
+
+		for(let [key,value] of ["a",'b'].entries()){
+			console.log(key,value);
+		}
+
+
+
+		// 对于可遍历的结构不想使用for循环遍历时，可以调用接口下面的next方法
+		let letter=['a','b','c'];
+		let entries=letter.entries();
+
+		console.log(entries.next().value);
+		console.log(entries.next().value);
+		console.log(entries.next().value);
+	</script>
+</body>
+</html>

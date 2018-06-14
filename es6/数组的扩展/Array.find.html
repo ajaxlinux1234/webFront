@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.Array.find()参数为回调函数，返回符合条件的值
+	    // 2.Array.findIndex()返回符合条件位置的值,找到返回位置，找不到返回-1
+	    // 3.他们俩的第二个参数传入回调函数中绑定的this对象
+
+
+	    var person={"age":24};
+
+
+	   console.log([1,5,25].find(function(r){
+	   	return r>this.age;
+	   },person));
+	   // 4.Array.findIndex()解决了indexOf不能查找数组中包含的NaN的问题
+
+
+	   console.log([NaN].indexOf(NaN));
+	   console.log([NaN].findIndex(y=>Object.is(NaN,y)));
+	</script>
+</body>
+</html>

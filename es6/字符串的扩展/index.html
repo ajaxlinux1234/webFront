@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1,字符串的Unicode表示法,以前的码店超过\u0000~\uFFFF必须用双字节表示，现在加一个{}就行
+
+
+		console.log("\uD842\uDFB7");
+		console.log("\u{20BB7}");
+
+
+		// 2.codePointAt方法可以返回4个字节储存的（Unicode 码点大于0xFFFF的字符）的码点,如果想转化为16进制可以用toString(16)
+
+
+
+		let s = '𠮷a';
+		for (let ch of s) {
+		  console.log(ch.codePointAt(0).toString(16));
+		}
+
+
+		// 此方法也可以用于测试一个字符是有两个字节还是四个字节组成
+
+		function is32Bit(c){
+			return c.codePointAt(0)>0xFFFF;
+		}
+
+		is32Bit("𠮷") // true
+		is32Bit("a") // false
+
+
+		// 3.String.fromCodePoint()为es6新增，可以识别四字节的字符，把码店转化为原来的字符。
+
+
+		console.log(String.fromCodePoint(0x20BB7));
+
+		// 4.字符串还可以遍历
+
+
+
+		for(let i in "hello"){
+			console.log("hello"[i]);
+		}
+
+
+		// 5.at可以识别码点大于0xFFFF的字符
+
+
+		console.log('abc'.at(0));
+		console.log('𠮷'.at(0) );
+
+		// 6.欧洲语言带有语调符号和重音符号，有两种写法，一种是直接写一个码店，另一种是多个码点的组合，es5会判断这两种写法不想等，normalize()方法，传入对应的参数可以判断两种写法相等,此方法可以传入参数,NFC:返回一个拼接字符，NFD:返回多个字符
+
+
+
+		console.log('\u01D1'.normalize() === '\u004F\u030C'.normalize());
+
+		// 7.includes(),startWith(),endWith()，第一个参数为检索的字符串，第二个参数为开始检索的位置
+
+
+
+		let s="hello world";
+
+
+		let result=s.includes("hello",0);
+		console.log(result);
+		// 8.repeat()方法中传入非负数，非Infinity的数字，让字符串重复相应的次数
+
+
+		console.log("xiaoming".repeat(4));
+
+
+		// 9.padStart(),padEnd()方法可以补全字符串,第一个参数为返回的字符串的长度，第二个为补充的内容
+
+
+
+		console.log("x".padStart(5,"ab"));
+
+
+		// 10.我们在传参数时可以这样写
+
+
+		alert`1`;
+
+		// 11.写函数时可以省略部分参数
+
+
+		function tag(stringArr, value1, value2){
+		  // ...
+		}
+
+		// 等同于
+
+		function tag(stringArr, ...values){
+		  // ...
+		}
+	</script>
+</body>
+</html>

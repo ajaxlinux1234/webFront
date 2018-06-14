@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.必须加[],当直接用"."赋值时一定加括号否则会解析成字符串
+
+
+		let s=Symbol(),a={};
+
+		a[s]="小名";
+		a.j="小红";
+		console.log(a[s]);
+		console.log(a.s);
+		console.log(a.j);
+		// 2.能够保证每个属性名都不想等
+
+		let q=Symbol(),w=Symbol(),e=Symbol();
+		let obj={
+			[q]:"wuhu",
+			[w](){
+				console.log("增强的对象写法");
+			},
+			[e]:function(){
+				console.log("普通的对象写法");
+			}
+		}
+
+		console.log(obj[q]);
+		obj[w]();
+		obj[e]();
+		// 3.Symbol作为属性名时该属性为公开属性
+	</script>
+</body>
+</html>

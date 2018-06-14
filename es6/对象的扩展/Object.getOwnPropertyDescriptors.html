@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 此方法的用处：
+		// 1.完成Object.assign()方法不能完成的对象set,get方法的copy
+		const source={
+			set foo(val){
+				console.log(val);
+			}
+		}
+
+
+		const target={};
+
+
+		Object.defineProperties(target,Object.getOwnPropertyDescriptors(source));
+
+
+		console.log(target);
+		// 2.打印出此方法返回的对象
+
+
+		const obj2={
+			foo:123,
+			set (val)
+		}
+	</script>
+</body>
+</html>

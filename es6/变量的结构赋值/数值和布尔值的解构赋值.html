@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 在对右边的布尔值或数值赋给左边，不能是undefined或者是null(会报错),会先将右边的转化为对象
+
+		let {toString:s}=123;
+		let {toString:h}=true;
+
+
+		console.log(s);
+		console.log(h);
+	</script>
+</body>
+</html>

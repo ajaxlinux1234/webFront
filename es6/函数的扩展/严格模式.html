@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 在函数参数有默认值，结构赋值，...rest参数时，函数内部不能使用严格模式，否则会报错。我们可以在全局中设置严格模式，或者把函数放在一个没有参数的自执行函数中
+
+
+		const dosomething=(function(){
+			'use strict'
+
+			return function(value=42){
+				return value;
+			}
+		}());
+	</script>
+</body>
+</html>

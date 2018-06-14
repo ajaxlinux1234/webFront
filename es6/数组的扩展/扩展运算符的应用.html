@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.复制数组
+		const arr1=[1,2,3];
+		const arr2=[...arr1];
+		const [...arr3]=arr2;//两种赋值方法
+
+		// 2.合并数组
+
+		const arrB1=[1,2,3];
+		const arrB2=[4,5,6];
+		const arrB3=[7,8,9];
+
+
+		const arrB4=[...arrB1,...arrB2,...arrB3];
+		// 3.与解构赋值结合
+
+		const [first,...rest]=[1,2,3,4,5];//...rest只能放在最后一位
+		// 4.将字符串转化为数组,这种写法有个好处能够识别四个字节的字符
+		console.log([..."hello"]);
+		// 4.因此正真的判断字符串的长度可以这样写
+
+
+		const length=(str)=>return [...str].length;		
+
+
+	</script>
+</body>
+</html>

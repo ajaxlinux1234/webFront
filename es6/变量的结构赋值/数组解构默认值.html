@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 我们可以在表达式的左边为变量设置一个默认值，只有右边的值为undefined(严格等于undefined,null不===于undefined，所以会把左边的覆盖掉,也就是除undefined外其它的值都可以覆盖左边的),另外注意在赋值时值或变量一定是已经存在
+
+
+		let [a=4,b]=[5];
+		let [s=6,d=5]=[undefined];
+		let [q=4]=[null];
+
+		// let[x=y,y=1]=[];//这样写会报错，y没有提前声明
+
+
+		console.log(a);
+		console.log(s);
+		console.log(q);
+	</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// Object.assign()方法只能拷贝自身属性（不能拷贝继承属性），也不能拷贝不可枚举属性
+
+
+		const r=Object.assign({'a':4},Object.defineProperty({},'key',{
+			enumberable:false,
+			value:'hello'
+		}));
+		console.log(r);
+	</script>
+</body>
+</html>

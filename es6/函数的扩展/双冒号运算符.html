@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 左面为作用域::右面为方法，如果返回一个对象可以链式调用
+
+
+		function hasOwn(obj, key) {
+		  return obj::hasOwnProperty(key);
+		}
+
+		foo::bar(...arguments);
+		// 等同于
+		bar.apply(foo, arguments);
+
+
+		import { map, takeWhile, forEach } from "iterlib";
+
+		getPlayers()
+		::map(x => x.character())
+		::takeWhile(x => x.strength > 100)
+		::forEach(x => console.log(x));
+	</script>
+</body>
+</html>

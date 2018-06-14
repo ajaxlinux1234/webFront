@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 对于对象中get,set 函数，name属性加上get或者set前缀
+
+
+		const obj={
+			get foo(){},
+			set foo(x){}
+		}
+
+
+		const descriptor=Object.getOwnPropertyDescriptor(obj,'foo');
+
+		console.log(descriptor.get.name);
+		console.log(descriptor.set.name);
+
+		// 对于以Symbol对象作为属性名的，name返回Symbol对象的描述
+
+
+
+		const key1=Symbol('description');
+		const key2=Symbol();
+
+		let obj2={
+			[key1](){},
+			[key2](){}
+		}
+
+
+
+		console.log(obj2[key1].name);
+		console.log(obj2[key2].name);
+	</script>
+</body>
+</html>

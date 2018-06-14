@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 当我们想重复运用一个Symbol时，可以用Symbol().for
+		console.log(Symbol.for('a')===Symbol.for("a"));
+		// 2.keyFor返回一个登记过的Symbol的key值
+		let s1 = Symbol.for("foo");
+		Symbol.keyFor(s1) // "foo"
+
+		let s2 = Symbol("foo");
+		Symbol.keyFor(s2) // u
+		// 3.我们可以在主页中找到与iframe中值一样的两者
+
+		iframe = document.createElement('iframe');
+		iframe.src = String(window.location);
+		document.body.appendChild(iframe);
+
+		iframe.contentWindow.Symbol.for('foo') === Symbol.for('foo')
+	</script>
+</body>
+</html>

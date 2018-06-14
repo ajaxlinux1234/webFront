@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function tco(f) {
+		  var value;
+		  var active = false;
+		  var accumulated = [];
+
+		  return function accumulator() {
+		    accumulated.push(arguments);
+		    if (!active) {
+		      active = true;
+		      while (accumulated.length) {
+		        value = f.apply(this, accumulated.shift());
+		      }
+		      active = false;
+		      return value;
+		    }
+		  };
+		}
+
+		var sum = tco(function(x, y) {
+		  if (y > 0) {
+		    return sum(x + 1, y - 1)
+		  }
+		  else {
+		    return x
+		  }
+		});
+
+		sum(1, 100000)
+
+
+		// 在非严格模式下，尾调用可能发生栈溢出，上面的荔枝我们对其优化
+	</script>
+</body>
+</html>

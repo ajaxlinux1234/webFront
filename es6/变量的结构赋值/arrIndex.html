@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 只要右边的数据可迭代（具有Iterator接口）都可以进行解构赋值，解构赋值就是右边的数据对左边的一个整体的赋值
+
+		let [a,[b,d],c]=[1,[2,3],4];
+
+		let[s,h]=['4'];//h变量匹配不上赋值为undefined;
+		console.log("a",a);
+		console.log("h",h);
+
+
+		let [d,n]={};//右边转化为类型之后没有迭代接口赋值后就会报错
+	</script>
+</body>
+</html>

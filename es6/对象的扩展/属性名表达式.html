@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 我们可以为对象定义属性名或者方法名时含有表达式
+		let msg="hello";
+		const obj={
+			age:25,
+			[msg]:'world',
+			['xiao'+'ming'](){
+				console.log(1);
+			}
+		}
+
+
+		console.log(obj[msg]);
+		console.log(obj['hello']);
+		obj.xiaoming();
+		// 如果属性名为一个对象,它会转化为字符串[object object]
+	</script>
+</body>
+</html>

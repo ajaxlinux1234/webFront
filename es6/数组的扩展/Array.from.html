@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<span>1</span>
+	<span>2</span>
+	<span>3</span>
+	<script>
+		// 1.Array.from可以将类数组对象和具有Iterator接口的对象，变为数组
+
+		const obj={
+			'0':'a',
+			'1':'b',
+			"length":2
+		}
+
+		const set1=new Set(['a','b']);
+		console.log(Array.from(obj));
+		console.log(Array.from(set1));
+
+		// 2.此方法可以与map一起使用
+
+
+		Array.from(arrayLike,x=>x*x);//两者相同
+		Array.from(arrayLike).map(x=>x*x);
+		// 3.一组获取dom节点案例
+
+
+		let spans=document.querySelectorAll("span");
+		let text1=Array.prototype.map.call(spans,s=>s.textContent);
+		let text2=Array.from(spans,s=>s.textContent);
+
+
+	</script>
+</body>
+</html>

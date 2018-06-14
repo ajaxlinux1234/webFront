@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 尾调用只在严格模式下起作用
+		// 我们在传参数时，传递两个参数，感到很奇怪，这时我们有两种改写方法
+
+
+		// 1.在尾部调用函数
+		function tailFactorial(n, total) {
+		  if (n === 1) return total;
+		  return tailFactorial(n - 1, n * total);
+		}
+
+		function factorial(n) {
+		  return tailFactorial(n, 1);
+		}
+
+		factorial(5) // 120
+		// 2.利用函数柯里化改写（把多个参数变为一个参数）
+		function currying(fn, n) {
+		  return function (m) {
+		    return fn.call(this, m, n);
+		  };
+		}
+
+		function tailFactorial(n, total) {
+		  if (n === 1) return total;
+		  return tailFactorial(n - 1, n * total);
+		}
+
+		const factorial = currying(tailFactorial, 1);
+
+		factorial(5) // 120
+	</script>
+</body>
+</html>

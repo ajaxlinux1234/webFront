@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 1.传参时把数组转换为参数
+
+		function f(x,y,z){
+
+		}
+
+		let args=[1,2,3];
+
+		f(...args);
+		// 2.Math.max方法
+		Math.max(1,2,6)
+		Math.max.apply(null,[1,2,6]);
+		Math.max(...[1,2,6]);//三种写法相同
+		// 3.push参数为数组
+
+
+		let arr1=[1,2,3],arr2=[4,5,6];
+
+		Array.prototype.push.call(arr1,arr2);
+		arr1.push(...arr2);
+		// 4.Date
+
+		new (Date.bind.apply(Date, [null, 2015, 1, 1]));
+		let date=new Date(...[2015,1,1]);
+		console.log(date);
+	</script>
+</body>
+</html>
